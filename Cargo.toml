@@ -1,0 +1,9 @@
+[package]
+name = "bunny-components"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+bunny-plugin = { git = "https://github.com/Relial/bunny-plugin.git", tag = "api-v2" }
+serde = { version = "1.0.228", features = ["derive"] }
+strum = { version = "0.28.0", features = ["derive"] }
