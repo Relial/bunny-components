@@ -55,6 +55,10 @@ impl Rgba {
     pub fn to_color32(self) -> Color32 {
         Color32::from_rgba_unmultiplied(self.r, self.g, self.b, self.a)
     }
+
+    pub fn to_bgra(self) -> [u8; 4] {
+        [self.b, self.g, self.r, self.a]
+    }
 }
 
 impl<'a> EditMenu<'a> for Rgba {
