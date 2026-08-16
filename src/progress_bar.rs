@@ -1,4 +1,4 @@
-use bunny_plugin::bunny_ui::{
+use bunny_ui::{
     Color32, Rect, Vec2,
     align::Align2,
     paint::{

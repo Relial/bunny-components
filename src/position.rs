@@ -1,6 +1,4 @@
-use bunny_plugin::bunny_ui::{
-    Pos2, Rect, Vec2, align::Align2, ui::BunnyUi, widgets::drag_value::DragValue,
-};
+use bunny_ui::{Pos2, Rect, Vec2, align::Align2, ui::BunnyUi, widgets::drag_value::DragValue};
 use serde::{Deserialize, Serialize};
 
 use crate::EditMenu;

@@ -1,4 +1,4 @@
-use bunny_plugin::bunny_ui::{
+use bunny_ui::{
     Color32,
     ROption::RSome,
     RString, Rect, Vec2,

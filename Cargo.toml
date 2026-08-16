@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-bunny-plugin = { git = "https://github.com/Relial/bunny-plugin.git", tag = "api-v2" }
+bunny-ui = { path = "../bunny-plugin/bunny-ui" }
 serde = { version = "1.0.228", features = ["derive"] }
 strum = { version = "0.28.0", features = ["derive"] }
+glam = "0.33.2"

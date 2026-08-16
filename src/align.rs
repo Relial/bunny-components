@@ -1,4 +1,4 @@
-use bunny_plugin::bunny_ui::{align::Align2, containers::combo_box::ComboBox, ui::BunnyUi};
+use bunny_ui::{align::Align2, containers::combo_box::ComboBox, ui::BunnyUi};
 
 use crate::{EditMenu, display::MenuDisplay};
 

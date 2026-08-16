@@ -1,4 +1,4 @@
-use bunny_plugin::bunny_ui::align::Align2;
+use bunny_ui::align::Align2;
 
 pub trait MenuDisplay {
     fn menu_display(&self) -> &str;
