@@ -3,8 +3,12 @@ name = "bunny-components"
 version = "0.1.0"
 edition = "2024"
 
+[features]
+default = []
+serde = ["dep:serde", "bunny-ui/serde"]
+
 [dependencies]
-bunny-ui = { path = "../bunny-plugin/bunny-ui" }
-serde = { version = "1.0.228", features = ["derive"] }
+bunny-ui = { git = "https://github.com/Relial/bunny-plugin.git", tag = "api-v3" }
+serde = { version = "1.0.229", features = ["derive"], optional = true }
 strum = { version = "0.28.0", features = ["derive"] }
 glam = "0.33.2"

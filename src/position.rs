@@ -1,9 +1,9 @@
 use bunny_ui::{Pos2, Rect, Vec2, align::Align2, ui::BunnyUi, widgets::drag_value::DragValue};
-use serde::{Deserialize, Serialize};
 
 use crate::EditMenu;
 
-#[derive(Clone, Copy, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct RelativePosition {
     pub anchor: Align2,
     pub offset: Vec2,
@@ -25,11 +25,11 @@ impl RelativePosition {
 impl<'a> EditMenu<'a> for RelativePosition {
     fn edit_menu(&'a mut self, ui: &mut BunnyUi<'a>) {
         ui.horizontal(|ui| {
-            ui.label("Anchor");
+            ui.label("Anchor:");
             self.anchor.edit_menu(ui);
         });
         ui.horizontal(|ui| {
-            ui.label("Position");
+            ui.label("Position:");
             ui.add(DragValue::new(&mut self.offset.x).prefix("x"));
             ui.add(DragValue::new(&mut self.offset.y).prefix("y"));
         });

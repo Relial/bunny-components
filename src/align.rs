@@ -15,7 +15,7 @@ impl EditMenu<'_> for Align2 {
             Align2::RIGHT_CENTER,
             Align2::RIGHT_TOP,
         ];
-        ComboBox::from_id_salt(ui.next_id())
+        ComboBox::from_id(ui.next_id())
             .selected_text(self.menu_display())
             .show_ui(ui, |ui| {
                 for anchor in ANCHORS {
