@@ -16,12 +16,12 @@ use bunny_ui::{
 use crate::position::RelativePosition;
 
 pub struct Text {
-    text: RString,
-    position: RelativePosition,
-    pivot: Align2,
-    font_id: FontId,
-    text_color: Color32,
-    highlight: Option<TextHighlight>,
+    pub text: RString,
+    pub position: RelativePosition,
+    pub pivot: Align2,
+    pub font_id: FontId,
+    pub text_color: Color32,
+    pub highlight: Option<TextHighlight>,
 }
 
 impl Text {
@@ -40,55 +40,71 @@ impl Text {
     }
 
     #[inline]
-    pub fn pos(mut self, pos: impl Into<Vec2>) -> Self {
+    pub fn with_pos(mut self, pos: impl Into<Vec2>) -> Self {
         self.position.offset = pos.into();
         self
     }
 
     #[inline]
-    pub fn anchor(mut self, anchor: Align2) -> Self {
+    pub fn with_anchor(mut self, anchor: Align2) -> Self {
         self.position.anchor = anchor;
         self
     }
 
     #[inline]
-    pub fn pos_rel(mut self, pos: RelativePosition) -> Self {
+    pub fn with_pos_rel(mut self, pos: RelativePosition) -> Self {
         self.position = pos;
         self
     }
 
     #[inline]
-    pub fn pivot(mut self, pivot: Align2) -> Self {
+    pub fn with_pivot(mut self, pivot: Align2) -> Self {
         self.pivot = pivot;
         self
     }
 
     #[inline]
-    pub fn font(mut self, font: FontId) -> Self {
+    pub fn with_font(mut self, font: FontId) -> Self {
         self.font_id = font;
         self
     }
 
     #[inline]
-    pub fn color(mut self, color: Color32) -> Self {
+    pub fn with_font_size(mut self, size: f32) -> Self {
+        self.font_id.size = size;
+        self
+    }
+
+    #[inline]
+    pub fn with_color(mut self, color: Color32) -> Self {
         self.text_color = color;
         self
     }
 
     #[inline]
-    pub fn highlight(mut self, highlight: impl Into<TextHighlight>) -> Self {
+    pub fn with_highlight(mut self, highlight: impl Into<TextHighlight>) -> Self {
         self.highlight = Some(highlight.into());
         self
     }
 
     #[inline]
-    pub fn shadow(self, shadow: TextShadow) -> Self {
-        self.highlight(shadow)
+    pub fn with_shadow(self, shadow: TextShadow) -> Self {
+        self.with_highlight(shadow)
     }
 
     #[inline]
-    pub fn background(self, background: TextBackground) -> Self {
-        self.highlight(background)
+    pub fn with_background(self, background: TextBackground) -> Self {
+        self.with_highlight(background)
+    }
+}
+
+impl Text {
+    #[inline]
+    pub fn highlight_color_mut(&mut self) -> Option<&mut Color32> {
+        self.highlight.as_mut().map(|h| match h {
+            TextHighlight::Shadow(text_shadow) => &mut text_shadow.color,
+            TextHighlight::Background(text_background) => &mut text_background.color,
+        })
     }
 }
 
@@ -131,7 +147,8 @@ impl Text {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum TextHighlight {
     Shadow(TextShadow),
     Background(TextBackground),
@@ -151,7 +168,8 @@ impl From<TextBackground> for TextHighlight {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct TextShadow {
     pub offset: Vec2,
     pub color: Color32,
@@ -175,7 +193,8 @@ impl TextShadow {
     }
 }
 
-#[derive(Debug, PartialEq)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct TextBackground {
     pub color: Color32,
     pub expand: f32,
